@@ -27,6 +27,7 @@ IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &src)
 }
 
 IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &image) const {
+	IntensityImage*  = ImageFactory::newIntensityImage();
 	int xImageSize = image.getWidth();
 	int yImageSize = image.getHeight();
 
