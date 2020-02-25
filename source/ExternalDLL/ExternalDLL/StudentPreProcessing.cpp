@@ -26,23 +26,20 @@ IntensityImage * StudentPreProcessing::stepScaleImage(const IntensityImage &src)
 	return IDoWanderEverywhere;
 }
 
-IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &image) const {
-	IntensityImage*  = ImageFactory::newIntensityImage();
-	int xImageSize = image.getWidth();
-	int yImageSize = image.getHeight();
+IntensityImage* StudentPreProcessing::stepEdgeDetection(const IntensityImage& src) const {
+	cv::Mat OverHillOverDale;
+	HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, OverHillOverDale); //img to mat
+	//cv::medianBlur(*image, *image, 3);
+	//cv::GaussianBlur(*image, *image, cv::Size(3, 3), 0, 0, cv::BORDER_DEFAULT);
+	cv::Mat Gx = (cv::Mat_<float>(3, 3) << -1, 0, 1, -2, 0, 2, -1, 0, 1);
+	cv::Mat Gy = (cv::Mat_<float>(3, 3) << 1, 2, 1, 0, 0, 0, -1, -2, -1);
 
-	int const xSize = 2;
-	int const ySize = 2;
-	int matrix[xSize][ySize];
-
-	for (int i = 0; i < xImageSize - xSize; i++)
-	{
-		for (int j = 0; j < yImageSize - ySize; j++)
-		{
-
-		}
-	}
-	return nullptr;
+	cv::Mat OverParkOverPale;
+	filter2D(OverHillOverDale, OverParkOverPale, CV_8U, Gx, cv::Point(-1, -1), 0, cv::BORDER_DEFAULT);
+	filter2D(OverHillOverDale, OverParkOverPale, CV_8U, Gy, cv::Point(-1, -1), 0, cv::BORDER_DEFAULT);
+	IntensityImage* ThoroughFloodThoroughFire = ImageFactory::newIntensityImage();
+	HereBeDragons::NoWantOfConscienceHoldItThatICall(OverParkOverPale, *ThoroughFloodThoroughFire); //mat to img
+	return ThoroughFloodThoroughFire;
 }
 
 IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &image) const {
