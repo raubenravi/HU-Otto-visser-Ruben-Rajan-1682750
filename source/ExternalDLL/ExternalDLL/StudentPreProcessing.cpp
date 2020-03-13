@@ -3,6 +3,7 @@
 #include "GrayscaleAlgorithm.h"
 #include <opencv2\core\core.hpp>
 #include "HereBeDragons.h"
+#include "ImageIO.h"
 
 
 IntensityImage * StudentPreProcessing::stepToIntensityImage(const RGBImage &image) const {
@@ -42,6 +43,19 @@ IntensityImage* StudentPreProcessing::stepEdgeDetection(const IntensityImage& sr
 	return ThoroughFloodThoroughFire;
 }
 
-IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &image) const {
-	return nullptr;
+IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &src) const {
+	cv::Mat OverHillOverDale;
+	cv::Mat OverParkOverPale;
+	HereBeDragons::HerLoveForWhoseDearLoveIRiseAndFall(src, OverHillOverDale); //img to mat
+	cv::threshold(OverHillOverDale, OverParkOverPale, 125, 255, cv::THRESH_BINARY);
+	IntensityImage* ThoroughFloodThoroughFire = ImageFactory::newIntensityImage();
+	HereBeDragons::NoWantOfConscienceHoldItThatICall(OverParkOverPale, *ThoroughFloodThoroughFire);
+
+	//IntensityImage* newImage = ImageFactory::newIntensityImage(image);
+	ImageIO::debugFolder = "C:\\Users\ruben\Documents\Debug_output";
+	ImageIO::isInDebugMode = true;
+	//Save the image using the debug path
+	ImageIO::saveIntensityImage(*ThoroughFloodThoroughFire, ImageIO::getDebugFileName("debug.png"));
+	
+	return ThoroughFloodThoroughFire;
 }
